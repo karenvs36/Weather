@@ -21,11 +21,11 @@ const Current = ({ data }: CurrentProps) => {
   const currentDate = getCurrentDate();
 
   // Safely accessing data with optional chaining
-  const weatherIcon = data?.current?.condition?.icon;
-  const temp = data?.current?.temp_f;
-  const conditionText = data?.current?.condition?.text;
-  const locationName = data?.location?.name;
-  const locationRegion = data?.location?.region;
+  const weatherIcon = data.current?.condition.icon;
+  const temp = data.current?.temp_f;
+  const conditionText = data.current?.condition.text;
+  const locationName = data.location?.name;
+  const locationRegion = data.location?.region;
 
   return (
     <div className="flex flex-col mb-8 md:mb-0 items-start gap-2 w-1/2">
@@ -44,13 +44,15 @@ const Current = ({ data }: CurrentProps) => {
           </div>
         )}
       </div>
-      <div>
-        <p className="text-5xl text-white">
-          {temp?.toFixed()}
-          <span>°</span>
-        </p>
-        <span className="text-white">{conditionText}</span>
-      </div>
+      {temp !== undefined && (
+        <div>
+          <p className="text-5xl text-white">
+            {temp.toFixed()}
+            <span>°</span>
+          </p>
+          <span className="text-white">{conditionText}</span>
+        </div>
+      )}
       <div>
         <div className="flex items-center text-black bg-white/90 px-2 py-2 rounded-xl">
           <IoLocationSharp />
