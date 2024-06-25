@@ -18,9 +18,12 @@ interface CurrentProps {
 }
 
 const Current = ({ data }: CurrentProps) => {
-  const currentDate = getCurrentDate();
+  // Ensure data is defined and has necessary properties
+  if (!data || !data.current || !data.location) {
+    return null; // Or handle loading state or error state accordingly
+  }
 
-  // Optional chaining and nullish coalescing to safely access nested properties
+  const currentDate = getCurrentDate();
   const weatherIcon = data.current?.condition?.icon || '';
   const temp = data.current?.temp_f;
   const conditionText = data.current?.condition?.text || '';
