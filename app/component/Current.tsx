@@ -18,15 +18,15 @@ interface CurrentProps {
 }
 
 const Current = ({ data }: CurrentProps) => {
-  // Ensure data is defined and has necessary properties
-  if (!data || !data.current || !data.location) {
-    return null; // Or handle loading state or error state accordingly
+  // Check if 'data' or 'data.current' is undefined
+  if (!data || !data.current) {
+    return <div>Loading...</div>; // Or handle loading state as needed
   }
 
   const currentDate = getCurrentDate();
-  const weatherIcon = data.current?.condition?.icon || '';
-  const temp = data.current?.temp_f;
-  const conditionText = data.current?.condition?.text || '';
+  const weatherIcon = data.current?.condition?.icon || ''; // Use optional chaining
+  const temp = data.current.temp_f; // temp_f is required based on your type definition
+  const conditionText = data.current?.condition?.text || ''; // Use optional chaining
   const locationName = data.location.name;
   const locationRegion = data.location.region;
 
@@ -47,23 +47,18 @@ const Current = ({ data }: CurrentProps) => {
           </div>
         )}
       </div>
-      {temp !== undefined && (
-        <div>
-          <p className="text-5xl text-white">
-            {temp.toFixed()}
-            <span>°</span>
-          </p>
-          <span className="text-white">{conditionText}</span>
-        </div>
-      )}
-      {locationName && locationRegion && (
-        <div className="flex items-center text-black bg-white/90 px-2 py-2 rounded-xl">
-          <IoLocationSharp />
-          <span>
-            {locationName}, {locationRegion}
-          </span>
-        </div>
-      )}
+      <div>
+        <p className="text-5xl text-white">
+          {temp.toFixed()}<span>°</span>
+        </p>
+        <span className="text-white">{conditionText}</span>
+      </div>
+      <div className="flex items-center text-black bg-white/90 px-2 py-2 rounded-xl">
+        <IoLocationSharp />
+        <span>
+          {locationName}, {locationRegion}
+        </span>
+      </div>
     </div>
   );
 };
