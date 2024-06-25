@@ -20,10 +20,9 @@ interface CurrentProps {
 const Current = ({ data }: CurrentProps) => {
   const currentDate = getCurrentDate();
 
-  // Safely accessing data with optional chaining
-  const weatherIcon = data.current?.condition.icon;
+  const weatherIcon = data.current?.condition?.icon;
   const temp = data.current?.temp_f;
-  const conditionText = data.current?.condition.text;
+  const conditionText = data.current?.condition?.text;
   const locationName = data.location?.name;
   const locationRegion = data.location?.region;
 
@@ -39,12 +38,12 @@ const Current = ({ data }: CurrentProps) => {
             <img
               className="w-[50px] object-cover"
               src={weatherIcon}
-              alt={conditionText}
+              alt={conditionText || ""}
             />
           </div>
         )}
       </div>
-      {temp !== undefined && (
+      {temp !== undefined && conditionText !== undefined && (
         <div>
           <p className="text-5xl text-white">
             {temp.toFixed()}
@@ -53,14 +52,14 @@ const Current = ({ data }: CurrentProps) => {
           <span className="text-white">{conditionText}</span>
         </div>
       )}
-      <div>
+      {locationName && locationRegion && (
         <div className="flex items-center text-black bg-white/90 px-2 py-2 rounded-xl">
           <IoLocationSharp />
           <span>
             {locationName}, {locationRegion}
           </span>
         </div>
-      </div>
+      )}
     </div>
   );
 };
