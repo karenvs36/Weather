@@ -2,24 +2,30 @@ import { getCurrentDate } from "../utils/currentDate";
 import { IoLocationSharp } from "react-icons/io5";
 
 interface CurrentProps {
-    data: {
-        current?: {
-            condition: {
-                icon: string;
-                text: string;
-            };
-            temp_f: number;
-        };
-        location: {
-            name: string;
-            region: string;
-        };
+  data: {
+    current?: {
+      condition: {
+        icon: string;
+        text: string;
+      };
+      temp_f: number;
     };
+    location: {
+      name: string;
+      region: string;
+    };
+  };
 }
 
 const Current = ({ data }: CurrentProps) => {
   const currentDate = getCurrentDate();
-  const weatherIcon = data.current.condition.icon;
+
+  // Safely accessing data with optional chaining
+  const weatherIcon = data?.current?.condition?.icon;
+  const temp = data?.current?.temp_f;
+  const conditionText = data?.current?.condition?.text;
+  const locationName = data?.location?.name;
+  const locationRegion = data?.location?.region;
 
   return (
     <div className="flex flex-col mb-8 md:mb-0 items-start gap-2 w-1/2">
@@ -33,23 +39,23 @@ const Current = ({ data }: CurrentProps) => {
             <img
               className="w-[50px] object-cover"
               src={weatherIcon}
-              alt={data.current.condition.text}
+              alt={conditionText}
             />
           </div>
         )}
       </div>
       <div>
         <p className="text-5xl text-white">
-          {data.current.temp_f.toFixed()}
+          {temp?.toFixed()}
           <span>°</span>
         </p>
-        <span className="text-white">{data.current.condition.text}</span>
+        <span className="text-white">{conditionText}</span>
       </div>
       <div>
         <div className="flex items-center text-black bg-white/90 px-2 py-2 rounded-xl">
           <IoLocationSharp />
           <span>
-            {data.location.name}, {data.location.region}
+            {locationName}, {locationRegion}
           </span>
         </div>
       </div>
