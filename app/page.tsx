@@ -6,9 +6,13 @@ import Current from "./component/Current";
 import WeekForecast from "./component/WeekForecast";
 import WeatherDetails from "./component/WeatherDetails";
 import Link from "next/link";
+import { WeatherData } from "./types";  // Import the interfaces
 
 const Home = () => {
-  const [data, setData] = useState({});
+  const [data, setData] = useState<WeatherData>({
+    location: { name: '', region: '' }, // Default value with empty strings
+    current: { condition: { icon: '', text: '' }, temp_f: 0 }
+  });
   const [location, setLocation] = useState("");
   const [error, setError] = useState("");
 
@@ -28,13 +32,16 @@ const Home = () => {
         setError("");
       } catch (error) {
         setError("City not found");
-        setData({});
+        setData({
+          location: { name: '', region: '' },
+          current: { condition: { icon: '', text: '' }, temp_f: 0 }
+        });
       }
     }
   };
 
   let content;
-  if (Object.keys(data).length === 0 && error === "") {
+  if (data.location.name === '' && error === "") {
     content = (
       <div className="text-white text-center mt-[5rem]">
         <h2 className="text-3xl font-bold mb-4">Welcome to the weather app</h2>
@@ -69,7 +76,7 @@ const Home = () => {
         <div className="flex flex-col md:flex-row justify-between items-center p-12">
           <Input handleSearch={handleSearch} setLocation={setLocation} />
           <Link href="/">
-            <h1 className="mb-8 md:mb-0 order-1 text-4xl text-white py-2 px-4 rounded-xl italic font-bold cursor-pointer">
+            <h1 className="mb-8 md:mb-0 order-1 text-white py-2 px-4 rounded-xl italic font-bold cursor-pointer">
               Weather App.
             </h1>
           </Link>
