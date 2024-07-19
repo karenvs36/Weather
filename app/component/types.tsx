@@ -7,12 +7,12 @@ export interface Condition {
 export interface CurrentWeather {
   condition: Condition;
   temp_f: number;
-  wind_mph: number;
-  humidity: number;
-  wind_dir: string;
-  pressure_mb: number;
-  feelslike_f: number;
-  vis_km: number;
+  wind_mph: number; // Add this
+  humidity: number; // Add this
+  wind_dir: string; // Add this
+  pressure_mb: number; // Add this
+  feelslike_f: number; // Add this
+  vis_km: number; // Add this
 }
 
 export interface Astro {

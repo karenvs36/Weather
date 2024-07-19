@@ -10,7 +10,13 @@ const MainComponent = () => {
         icon: "https://example.com/icon.png",
         text: "Sunny"
       },
-      temp_f: 75.0
+      temp_f: 75.0,
+      wind_mph: 5.0, // Add this
+      humidity: 60, // Add this
+      wind_dir: "N", // Add this
+      pressure_mb: 1015, // Add this
+      feelslike_f: 74.0, // Add this
+      vis_km: 10 // Add this
     },
     location: {
       name: "City",
@@ -27,6 +33,10 @@ const MainComponent = () => {
             },
             maxtemp_f: 75.0,
             mintemp_f: 65.0
+          },
+          astro: {
+            sunrise: "05:00 AM",
+            sunset: "08:00 PM"
           }
         },
         // Add more days as needed
