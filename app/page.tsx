@@ -5,44 +5,13 @@ import Current from "./component/Current";
 import WeekForecast from "./component/WeekForecast";
 import WeatherDetails from "./component/WeatherDetails";
 import Link from "next/link";
-
-// Define types here
-interface Condition {
-  icon: string;
-  text: string;
-}
-
-interface CurrentWeather {
-  condition: Condition;
-  temp_f: number;
-}
-
-interface Location {
-  name: string;
-  region: string;
-}
-
-interface DayForecast {
-  date: string;
-  day: {
-    condition: Condition;
-    maxtemp_f: number;
-    mintemp_f: number;
-  };
-}
-
-interface WeatherData {
-  current?: CurrentWeather;
-  location: Location;
-  forecast?: {
-    forecastday: DayForecast[];
-  };
-}
+import { WeatherData } from "./component/types";
 
 const Home = () => {
   const [data, setData] = useState<WeatherData>({
-    location: { name: '', region: '' }, // Default value with empty strings
-    current: { condition: { icon: '', text: '' }, temp_f: 0 }
+    location: { name: '', region: '' },
+    current: { condition: { icon: '', text: '' }, temp_f: 0 },
+    forecast: { forecastday: [] } // Ensure this matches `types.tsx`
   });
   const [location, setLocation] = useState("");
   const [error, setError] = useState("");
@@ -69,7 +38,8 @@ const Home = () => {
         setError("City not found");
         setData({
           location: { name: '', region: '' },
-          current: { condition: { icon: '', text: '' }, temp_f: 0 }
+          current: { condition: { icon: '', text: '' }, temp_f: 0 },
+          forecast: { forecastday: [] }
         });
       }
     }
@@ -123,4 +93,3 @@ const Home = () => {
 };
 
 export default Home;
-{/*comment */}

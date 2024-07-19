@@ -1,4 +1,3 @@
-// Current.tsx
 import { getCurrentDate } from "../utils/currentDate";
 import { IoLocationSharp } from "react-icons/io5";
 import { WeatherData } from './types'; // Ensure the correct path
@@ -8,12 +7,16 @@ interface CurrentProps {
 }
 
 const Current = ({ data }: CurrentProps) => {
-  if (!data || !data.current) {
+  if (!data.current) {
     return <div>Loading...</div>;
   }
 
   const { current, location } = data;
-  const { condition, temp_f } = current!;
+  if (!current) {
+    return <div>No current weather data available</div>;
+  }
+
+  const { condition, temp_f } = current;
   const { icon, text } = condition;
   const currentDate = getCurrentDate();
 

@@ -1,29 +1,32 @@
 // types.ts
+export interface Condition {
+  icon: string;
+  text: string;
+}
+
+export interface CurrentWeather {
+  condition: Condition;
+  temp_f: number;
+}
+
+export interface Location {
+  name: string;
+  region: string;
+}
+
 export interface DayForecast {
   date: string;
   day: {
-    condition: {
-      icon: string;
-      text: string;
-    };
+    condition: Condition;
     maxtemp_f: number;
     mintemp_f: number;
   };
 }
 
 export interface WeatherData {
-  current: {
-    condition: {
-      icon: string;
-      text: string;
-    };
-    temp_f: number;
-  };
-  location: {
-    name: string;
-    region: string;
-  };
-  forecast: {
+  current?: CurrentWeather; // This is optional
+  location: Location;
+  forecast?: {
     forecastday: DayForecast[];
   };
 }
