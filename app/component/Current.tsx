@@ -42,12 +42,12 @@ const Current = ({ data }: CurrentProps) => {
           <h1 className="text-3xl text-white">Today</h1>
           <p className="text-white">{currentDate}</p>
         </div>
-        {icon && ( // Use 'icon' instead of 'weatherIcon'
+        {icon && (
           <div>
             <img
               className="w-[50px] object-cover"
               src={icon}
-              alt={text} // Use 'text' instead of 'conditionText'
+              alt={text}
             />
           </div>
         )}
@@ -56,7 +56,7 @@ const Current = ({ data }: CurrentProps) => {
         <p className="text-5xl text-white">
           {temp_f.toFixed()}<span>°</span>
         </p>
-        <span className="text-white">{text}</span> {/* Use 'text' for condition text */}
+        <span className="text-white">{text}</span>
       </div>
       <div className="flex items-center text-black bg-white/90 px-2 py-2 rounded-xl">
         <IoLocationSharp />
