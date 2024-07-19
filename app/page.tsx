@@ -29,7 +29,16 @@ const Home = () => {
         const fetchedData = await response.json();
         setData({
           location: fetchedData.location,
-          current: fetchedData.current,
+          current: {
+            condition: fetchedData.current.condition,
+            temp_f: fetchedData.current.temp_f,
+            wind_mph: fetchedData.current.wind_mph,
+            humidity: fetchedData.current.humidity,
+            wind_dir: fetchedData.current.wind_dir,
+            pressure_mb: fetchedData.current.pressure_mb,
+            feelslike_f: fetchedData.current.feelslike_f,
+            vis_km: fetchedData.current.vis_km,
+          },
           forecast: fetchedData.forecast // Ensure this matches the WeatherData type
         });
         setLocation("");
@@ -38,12 +47,22 @@ const Home = () => {
         setError("City not found");
         setData({
           location: { name: '', region: '' },
-          current: { condition: { icon: '', text: '' }, temp_f: 0 },
+          current: { 
+            condition: { icon: '', text: '' }, 
+            temp_f: 0, 
+            wind_mph: 0, 
+            humidity: 0, 
+            wind_dir: '', 
+            pressure_mb: 0, 
+            feelslike_f: 0, 
+            vis_km: 0 
+          },
           forecast: undefined // Ensure forecast is handled correctly
         });
       }
     }
   };
+  
 
   let content;
   if (data.location.name === '' && error === "") {
