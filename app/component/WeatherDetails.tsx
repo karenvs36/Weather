@@ -1,5 +1,11 @@
 // WeatherDetails.tsx
-import { WeatherData } from './types'; // Ensure the correct path
+import { WeatherData } from './types'; 
+import { BsSunrise, BsSunset } from "react-icons/bs";
+import { GiWindSlap, GiCompass } from "react-icons/gi";
+import { WiHumidity } from "react-icons/wi";
+import { MdAir } from "react-icons/md";
+import { CiTempHigh } from "react-icons/ci";
+import { FaEye } from "react-icons/fa";// Ensure the correct path
 
 interface WeatherDetailsProps {
   data: WeatherData;
