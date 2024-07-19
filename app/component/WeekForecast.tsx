@@ -1,3 +1,5 @@
+import Current from "./Current";
+
 interface DayForecast {
   date: string;
   day: {
