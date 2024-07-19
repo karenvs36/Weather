@@ -6,7 +6,27 @@ import Current from "./component/Current";
 import WeekForecast from "./component/WeekForecast";
 import WeatherDetails from "./component/WeatherDetails";
 import Link from "next/link";
-import { WeatherData } from "./types";  // Import the interfaces
+
+// Define types here
+interface Condition {
+  icon: string;
+  text: string;
+}
+
+interface CurrentWeather {
+  condition: Condition;
+  temp_f: number;
+}
+
+interface Location {
+  name: string;
+  region: string;
+}
+
+interface WeatherData {
+  current?: CurrentWeather;
+  location: Location;
+}
 
 const Home = () => {
   const [data, setData] = useState<WeatherData>({
