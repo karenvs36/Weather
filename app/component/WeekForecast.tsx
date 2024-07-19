@@ -1,22 +1,5 @@
-import Current from "./Current";
-
-interface DayForecast {
-  date: string;
-  day: {
-    condition: {
-      icon: string;
-      text: string;
-    };
-    maxtemp_f: number;
-    mintemp_f: number;
-  };
-}
-
-interface WeatherData {
-  forecast: {
-    forecastday: DayForecast[];
-  };
-}
+// WeekForecast.tsx
+import { WeatherData } from './types'; // Ensure the correct path
 
 interface WeekForeCastProps {
   data: WeatherData;
@@ -39,34 +22,4 @@ const WeekForecast = ({ data }: WeekForeCastProps) => {
   );
 };
 
-// Example of using the WeekForecast component
-const MainComponent = () => {
-  // Example data structure
-  const data: WeatherData = {
-    forecast: {
-      forecastday: [
-        {
-          date: "2024-07-18",
-          day: {
-            condition: {
-              icon: "https://example.com/icon.png",
-              text: "Sunny"
-            },
-            maxtemp_f: 75.0,
-            mintemp_f: 65.0
-          }
-        },
-        // Add more days as needed
-      ]
-    }
-  };
-
-  return (
-    <div className="flex md:flex-row flex-col p-12 items-center justify-between">
-      <Current data={data} />
-      <WeekForecast data={data} />
-    </div>
-  );
-};
-
-export default MainComponent;
+export default WeekForecast;

@@ -1,7 +1,6 @@
 'use client';
 import Input from "@/app/component/Input";
 import { useState } from "react";
-import React from "react";
 import Current from "./component/Current";
 import WeekForecast from "./component/WeekForecast";
 import WeatherDetails from "./component/WeatherDetails";
@@ -23,9 +22,21 @@ interface Location {
   region: string;
 }
 
+interface DayForecast {
+  date: string;
+  day: {
+    condition: Condition;
+    maxtemp_f: number;
+    mintemp_f: number;
+  };
+}
+
 interface WeatherData {
   current?: CurrentWeather;
   location: Location;
+  forecast?: {
+    forecastday: DayForecast[];
+  };
 }
 
 const Home = () => {
@@ -46,8 +57,12 @@ const Home = () => {
         if (!response.ok) {
           throw new Error();
         }
-        const data = await response.json();
-        setData(data);
+        const fetchedData = await response.json();
+        setData({
+          location: fetchedData.location,
+          current: fetchedData.current,
+          forecast: fetchedData.forecast
+        });
         setLocation("");
         setError("");
       } catch (error) {

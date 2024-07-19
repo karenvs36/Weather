@@ -1,38 +1,20 @@
+// Current.tsx
 import { getCurrentDate } from "../utils/currentDate";
 import { IoLocationSharp } from "react-icons/io5";
+import { WeatherData } from './types'; // Ensure the correct path
 
 interface CurrentProps {
-  data: {
-    current?: {
-      condition: {
-        icon: string;
-        text: string;
-      };
-      temp_f: number;
-    };
-    location: {
-      name: string;
-      region: string;
-    };
-  };
+  data: WeatherData;
 }
 
 const Current = ({ data }: CurrentProps) => {
-  // Check if 'data' or 'data.current' is undefined
   if (!data || !data.current) {
-    return <div>Loading...</div>; // Or handle loading state as needed
+    return <div>Loading...</div>;
   }
 
-  // Destructure data object
   const { current, location } = data;
-
-  // Destructure current object
-  const { condition, temp_f } = current!; // 'current' is ensured to exist here due to earlier check
-
-  // Destructure condition object
+  const { condition, temp_f } = current!;
   const { icon, text } = condition;
-
-  // Format current date
   const currentDate = getCurrentDate();
 
   return (
