@@ -1,33 +1,31 @@
-'use client';
+"use client";
 import Input from "@/app/component/Input";
 import { useState } from "react";
 import Current from "./component/Current";
 import WeekForecast from "./component/WeekForecast";
 import WeatherDetails from "./component/WeatherDetails";
 import Link from "next/link";
-import { WeatherData } from './component/types'; // Ensure the correct path
+import { WeatherData } from "./component/types"; // Ensure the correct path
 
 const Home = () => {
   const [data, setData] = useState<WeatherData>({
-    location: { name: '', region: '' }, // Default value with empty strings
-    current: { 
-      condition: { icon: '', text: '' },
+    location: { name: "", region: "" }, // Default value with empty strings
+    current: {
+      condition: { icon: "", text: "" },
       temp_f: 0,
       wind_mph: 0,
       humidity: 0,
-      wind_dir: '',
+      wind_dir: "",
       pressure_mb: 0,
       feelslike_f: 0,
-      vis_km: 0
+      vis_km: 0,
     },
-    forecast: undefined // Set the initial value to undefined to match the WeatherData type
+    forecast: undefined, // Set the initial value to undefined to match the WeatherData type
   });
   const [location, setLocation] = useState("");
   const [error, setError] = useState("");
-  const url = `http://api.weatherapi.com/v1/forecast.json?key=${process.env.NEXT_PUBLIC_WEATHER_API_KEY}&q=${location}&days=7&aqi=yes&alerts=yes`;
+  const url = `http://api.weatherapi.com/v1/forecast.json?key=b4acc038d1e7459c95514127242006&q=${location}&days=7&aqi=yes&alerts=yes`;
 
-{/*    const url = `http://api.weatherapi.com/v1/forecast.json?key=b4acc038d1e7459c95514127242006&q=${location}&days=7&aqi=yes&alerts=yes`;
- */}
   const handleSearch = async (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       e.preventDefault();
@@ -49,37 +47,38 @@ const Home = () => {
             feelslike_f: fetchedData.current.feelslike_f,
             vis_km: fetchedData.current.vis_km,
           },
-          forecast: fetchedData.forecast // Ensure this matches the WeatherData type
+          forecast: fetchedData.forecast, // Ensure this matches the WeatherData type
         });
         setLocation("");
         setError("");
       } catch (error) {
         setError("City not found");
         setData({
-          location: { name: '', region: '' },
-          current: { 
-            condition: { icon: '', text: '' }, 
-            temp_f: 0, 
-            wind_mph: 0, 
-            humidity: 0, 
-            wind_dir: '', 
-            pressure_mb: 0, 
-            feelslike_f: 0, 
-            vis_km: 0 
+          location: { name: "", region: "" },
+          current: {
+            condition: { icon: "", text: "" },
+            temp_f: 0,
+            wind_mph: 0,
+            humidity: 0,
+            wind_dir: "",
+            pressure_mb: 0,
+            feelslike_f: 0,
+            vis_km: 0,
           },
-          forecast: undefined // Ensure forecast is handled correctly
+          forecast: undefined, // Ensure forecast is handled correctly
         });
       }
     }
   };
-  
 
   let content;
-  if (data.location.name === '' && error === "") {
+  if (data.location.name === "" && error === "") {
     content = (
       <div className="text-white text-center mt-[5rem]">
         <h2 className="text-3xl font-bold mb-4">Welcome to the weather app</h2>
-        <p className="text-xl">Enter a city name to get the weather forecasts</p>
+        <p className="text-xl">
+          Enter a city name to get the weather forecasts
+        </p>
       </div>
     );
   } else if (error !== "") {
