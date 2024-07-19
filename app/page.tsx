@@ -10,7 +10,16 @@ import { WeatherData } from './component/types'; // Ensure the correct path
 const Home = () => {
   const [data, setData] = useState<WeatherData>({
     location: { name: '', region: '' }, // Default value with empty strings
-    current: { condition: { icon: '', text: '' }, temp_f: 0 },
+    current: { 
+      condition: { icon: '', text: '' },
+      temp_f: 0,
+      wind_mph: 0,
+      humidity: 0,
+      wind_dir: '',
+      pressure_mb: 0,
+      feelslike_f: 0,
+      vis_km: 0
+    },
     forecast: undefined // Set the initial value to undefined to match the WeatherData type
   });
   const [location, setLocation] = useState("");
