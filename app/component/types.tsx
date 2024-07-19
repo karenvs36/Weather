@@ -12,7 +12,7 @@ export interface DayForecast {
 }
 
 export interface WeatherData {
-  current?: {
+  current: {
     condition: {
       icon: string;
       text: string;
