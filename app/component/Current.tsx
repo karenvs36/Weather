@@ -23,12 +23,17 @@ const Current = ({ data }: CurrentProps) => {
     return <div>Loading...</div>; // Or handle loading state as needed
   }
 
+  // Destructure data object
+  const { current, location } = data;
+
+  // Destructure current object
+  const { condition, temp_f } = current!; // 'current' is ensured to exist here due to earlier check
+
+  // Destructure condition object
+  const { icon, text } = condition;
+
+  // Format current date
   const currentDate = getCurrentDate();
-  const weatherIcon = data.current?.condition?.icon || ''; // Use optional chaining
-  const temp = data.current.temp_f; // temp_f is required based on your type definition
-  const conditionText = data.current?.condition?.text || ''; // Use optional chaining
-  const locationName = data.location.name;
-  const locationRegion = data.location.region;
 
   return (
     <div className="flex flex-col mb-8 md:mb-0 items-start gap-2 w-1/2">
@@ -37,26 +42,26 @@ const Current = ({ data }: CurrentProps) => {
           <h1 className="text-3xl text-white">Today</h1>
           <p className="text-white">{currentDate}</p>
         </div>
-        {weatherIcon && (
+        {icon && ( // Use 'icon' instead of 'weatherIcon'
           <div>
             <img
               className="w-[50px] object-cover"
-              src={weatherIcon}
-              alt={conditionText}
+              src={icon}
+              alt={text} // Use 'text' instead of 'conditionText'
             />
           </div>
         )}
       </div>
       <div>
         <p className="text-5xl text-white">
-          {temp.toFixed()}<span>°</span>
+          {temp_f.toFixed()}<span>°</span>
         </p>
-        <span className="text-white">{conditionText}</span>
+        <span className="text-white">{text}</span> {/* Use 'text' for condition text */}
       </div>
       <div className="flex items-center text-black bg-white/90 px-2 py-2 rounded-xl">
         <IoLocationSharp />
         <span>
-          {locationName}, {locationRegion}
+          {location.name}, {location.region}
         </span>
       </div>
     </div>
