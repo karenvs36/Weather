@@ -32,7 +32,7 @@ const Current = ({ data }: CurrentProps) => {
             <img
               className="w-[50px] object-cover"
               src={icon}
-              alt={text}
+              alt={text || 'Weather icon'}
             />
           </div>
         )}
