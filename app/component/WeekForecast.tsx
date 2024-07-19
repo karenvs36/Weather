@@ -1,11 +1,28 @@
 // WeekForecast.tsx
 import { WeatherData } from './types'; // Ensure the correct path
 
-interface WeekForeCastProps {
+interface DayForecast {
+  date: string;
+  day: {
+    condition: {
+      icon: string;
+      text: string;
+    };
+    maxtemp_f: number;
+    mintemp_f: number;
+  };
+}
+
+interface WeekForecastProps {
   data: WeatherData;
 }
 
-const WeekForecast = ({ data }: WeekForeCastProps) => {
+const WeekForecast = ({ data }: WeekForecastProps) => {
+  // Check if data.forecast is undefined
+  if (!data.forecast) {
+    return <div>No forecast data available</div>;
+  }
+
   return (
     <div className='grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-7 gap-8 w-full'>
       {data.forecast.forecastday.map((day, index) => (

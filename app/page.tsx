@@ -5,13 +5,13 @@ import Current from "./component/Current";
 import WeekForecast from "./component/WeekForecast";
 import WeatherDetails from "./component/WeatherDetails";
 import Link from "next/link";
-import { WeatherData } from "./component/types";
+import { WeatherData } from './component/types'; // Ensure the correct path
 
 const Home = () => {
   const [data, setData] = useState<WeatherData>({
-    location: { name: '', region: '' },
+    location: { name: '', region: '' }, // Default value with empty strings
     current: { condition: { icon: '', text: '' }, temp_f: 0 },
-    forecast: { forecastday: [] } // Ensure this matches `types.tsx`
+    forecast: undefined // Set the initial value to undefined to match the WeatherData type
   });
   const [location, setLocation] = useState("");
   const [error, setError] = useState("");
@@ -30,7 +30,7 @@ const Home = () => {
         setData({
           location: fetchedData.location,
           current: fetchedData.current,
-          forecast: fetchedData.forecast
+          forecast: fetchedData.forecast // Ensure this matches the WeatherData type
         });
         setLocation("");
         setError("");
@@ -39,7 +39,7 @@ const Home = () => {
         setData({
           location: { name: '', region: '' },
           current: { condition: { icon: '', text: '' }, temp_f: 0 },
-          forecast: { forecastday: [] }
+          forecast: undefined // Ensure forecast is handled correctly
         });
       }
     }
